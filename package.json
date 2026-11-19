@@ -1,0 +1,9 @@
+{
+  "name": "valima-invite",
+  "private": true,
+  "description": "Valima invitation website for Tashkeen & Anusha",
+  "scripts": {
+    "og": "python3 scripts/build-og.py",
+    "video": "node tools/record-video.js frames"
+  }
+}

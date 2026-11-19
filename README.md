@@ -27,7 +27,7 @@ A white-themed, single-page invitation website for the Valima reception.
 - WhatsApp RSVP button with a pre-filled message (after setting a number)
 - Background music: *Lam Yati Nazeero Kafi Nazarin* (from 1:48, just before the refrain and rhythm come in), starting when the doors open and looping softly, with a play/pause button
 - Optional hosts line
-- WhatsApp/social link preview image (`og-image.png`) and gold favicon
+- WhatsApp link preview card (`assets/og-card.jpg`, built by `npm run og`) and gold favicon
 - Responsive layout for phones and desktops
 
 ## Run locally
@@ -88,9 +88,19 @@ https://tashkeensayyad.github.io/Walima-Invite/?to=Ahmed+Family
 
 The welcome card then says "Dear Ahmed Family", and the RSVP message includes the name. Add `&lang=sd` to open the invitation in Sindhi.
 
-## Link preview image
+## Link preview (WhatsApp card)
 
-`og-image.png` is shown when the link is shared on WhatsApp/Facebook. Its URL in `index.html` assumes the site is published at `https://tashkeensayyad.github.io/Walima-Invite/`; update the `og:url` and `og:image` tags if it lives elsewhere. To regenerate it, open `tools/og-image.html` at 1200×630 and take a screenshot.
+Shared links show a landscape card: `assets/og-card.jpg` (1200×630 JPEG, under 200 KB), drawn by `scripts/build-og.py` with Pillow in the site's own palette and fonts (`assets/fonts`, read through fontTools).
+
+```bash
+pip install pillow fonttools brotli
+```
+
+```bash
+npm run og
+```
+
+After redrawing the card, bump `?v=` on `og:image` and `twitter:image` in `index.html`: WhatsApp caches previews per URL for days. The og: tags assume the site lives at `https://tashkeensayyad.github.io/Walima-Invite/`.
 
 ## Customising
 
