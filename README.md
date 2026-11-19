@@ -40,7 +40,7 @@ python3 -m http.server 8000
 
 ## Publish with GitHub Pages
 
-In the repository settings, go to **Pages**, choose **Deploy from a branch**, select the branch and `/ (root)`, and save. The site will be live at `https://<username>.github.io/Walima-Invite/`.
+In the repository settings, go to **Pages**, choose **Deploy from a branch**, select the branch and `/ (root)`, and save. The site will be live at `https://<username>.github.io/Valima-Invite/`.
 
 ## Video invitation
 
@@ -83,7 +83,7 @@ Open `script.js`; the `CONFIG` block at the top controls:
 Add `?to=` with the guest's name to the link (use `+` for spaces):
 
 ```
-https://tashkeensayyad.github.io/Walima-Invite/?to=Ahmed+Family
+https://tashkeensayyad.github.io/Valima-Invite/?to=Ahmed+Family
 ```
 
 The welcome card then says "Dear Ahmed Family", and the RSVP message includes the name. Add `&lang=sd` to open the invitation in Sindhi.
@@ -100,7 +100,7 @@ pip install pillow fonttools brotli
 npm run og
 ```
 
-After redrawing the card, bump `?v=` on `og:image` and `twitter:image` in `index.html`: WhatsApp caches previews per URL for days. The og: tags assume the site lives at `https://tashkeensayyad.github.io/Walima-Invite/`.
+After redrawing the card, bump `?v=` on `og:image` and `twitter:image` in `index.html`: WhatsApp caches previews per URL for days. The og: tags assume the site lives at `https://tashkeensayyad.github.io/Valima-Invite/`.
 
 ## Customising
 
