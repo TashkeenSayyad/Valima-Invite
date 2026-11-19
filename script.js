@@ -16,11 +16,11 @@ const CONFIG = {
   music: "music.mp3",
 };
 
-// Valima: Tuesday 29 December 2026, 8:00 PM Pakistan Standard Time (UTC+5)
+// Valima: Tuesday 29 December 2026, 7:00 PM Pakistan Standard Time (UTC+5)
 const EVENT = {
   title: "Valima Reception · Tashkeen & Anusha",
-  start: new Date("2026-12-29T20:00:00+05:00"),
-  end: new Date("2026-12-29T23:30:00+05:00"),
+  start: new Date("2026-12-29T19:00:00+05:00"),
+  end: new Date("2026-12-29T22:30:00+05:00"),
   location: "Zam Zam Lawn, Thatta, Sindh, Pakistan",
   description: "You are cordially invited to the Valima reception of Tashkeen & Anusha. Dinner to follow.",
 };
@@ -214,7 +214,7 @@ $("calendarBtn").addEventListener("click", () => {
     "BEGIN:VALARM",
     "TRIGGER:-P1D",
     "ACTION:DISPLAY",
-    "DESCRIPTION:Valima tomorrow at 8:00 PM",
+    "DESCRIPTION:Valima tomorrow at 7:00 PM",
     "END:VALARM",
     "END:VEVENT",
     "END:VCALENDAR",
