@@ -450,6 +450,26 @@ body.locked main { transform: scale(1.05); }
   padding: 0 .12em;
   display: inline-block;
 }
+.parent {
+  font-family: var(--caps);
+  font-weight: 600;
+  font-size: clamp(11.5px, 3.1vw, 14px);
+  letter-spacing: .14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin: -2px 0 12px;
+}
+.parent em {
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: .02em;
+  font-size: 1.25em;
+  color: var(--muted);
+  display: block;
+  margin-bottom: -2px;
+}
 .amp-line {
   display: flex;
   align-items: center;
