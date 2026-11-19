@@ -1,0 +1,228 @@
+/* =========================================================
+   SETTINGS: edit these to customise the invitation
+   ========================================================= */
+const CONFIG = {
+  // WhatsApp number for RSVPs, international format, digits only
+  // e.g. "923001234567". Leave "" to hide the RSVP button.
+  rsvpWhatsApp: "",
+
+  // Optional hosts line under the names, e.g. "Mr & Mrs Sayyad".
+  // Leave "" to hide it.
+  hosts: "",
+  hostsSindhi: "",
+
+  // Background music file placed next to index.html (e.g. "music.mp3").
+  // The music button only appears if this file exists and loads.
+  music: "music.mp3",
+};
+
+// Valima: Tuesday 29 December 2026, 8:00 PM Pakistan Standard Time (UTC+5)
+const EVENT = {
+  title: "Valima Reception · Tashkeen & Anusha",
+  start: new Date("2026-12-29T20:00:00+05:00"),
+  end: new Date("2026-12-29T23:30:00+05:00"),
+  location: "Zam Zam Lawn, Thatta, Sindh, Pakistan",
+  description: "You are cordially invited to the Valima reception of Tashkeen & Anusha. Dinner to follow.",
+};
+
+const $ = (id) => document.getElementById(id);
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch { /* ignore */ } },
+};
+const params = new URLSearchParams(location.search);
+
+/* ---------- Personal greeting: ?to=Ahmed+Family ---------- */
+const guest = (params.get("to") || "").trim().slice(0, 60);
+if (guest) {
+  const g = $("greeting");
+  g.textContent = `Dear ${guest}`;
+  g.hidden = false;
+  document.title = `${guest} · Valima · Tashkeen & Anusha`;
+}
+
+/* ---------- Hosts line ---------- */
+const hostsEl = $("hosts");
+if (CONFIG.hosts) {
+  hostsEl.innerHTML = "";
+  hostsEl.append("Hosted by ", Object.assign(document.createElement("span"), { textContent: CONFIG.hosts }));
+  if (CONFIG.hostsSindhi) hostsEl.dataset.sd = `ميزبان: ${CONFIG.hostsSindhi}`;
+  hostsEl.hidden = false;
+}
+
+/* ---------- WhatsApp RSVP ---------- */
+const rsvp = $("rsvpBtn");
+if (CONFIG.rsvpWhatsApp) {
+  const msg = [
+    "Assalam-o-Alaikum! InshaAllah we will attend the Valima of Tashkeen & Anusha on 29 December 2026 at Zam Zam Lawn, Thatta.",
+    `Name: ${guest}`,
+    "Number of guests: ",
+  ].join("\n");
+  rsvp.href = `https://wa.me/${CONFIG.rsvpWhatsApp.replace(/\D/g, "")}?text=${encodeURIComponent(msg)}`;
+  rsvp.hidden = false;
+}
+
+/* ---------- Music ---------- */
+const audio = $("music");
+const musicBtn = $("musicBtn");
+if (CONFIG.music) {
+  audio.addEventListener("canplay", () => { musicBtn.hidden = false; }, { once: true });
+  audio.addEventListener("error", () => { musicBtn.hidden = true; }, { once: true });
+  audio.src = CONFIG.music;
+  audio.volume = 0.7;
+}
+function syncMusicBtn() {
+  const playing = !audio.paused;
+  musicBtn.classList.toggle("off", !playing);
+  musicBtn.setAttribute("aria-label", playing ? "Pause music" : "Play music");
+}
+musicBtn.addEventListener("click", () => {
+  if (audio.paused) audio.play().catch(() => {}); else audio.pause();
+});
+audio.addEventListener("play", syncMusicBtn);
+audio.addEventListener("pause", syncMusicBtn);
+
+/* ---------- Opening card ---------- */
+document.body.classList.add("locked");
+$("openBtn").addEventListener("click", () => {
+  const opening = $("opening");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (CONFIG.music) { audio.load(); audio.play().catch(() => {}); }
+  opening.classList.add("open");
+  document.body.classList.remove("locked");
+  // card fades, then the doors part slowly over ~3 s; the scene fades as they finish
+  const at = (ms, fn) => setTimeout(fn, reduced ? 0 : ms);
+  at(1500, revealVisible);
+  at(2600, showerPetals);
+  at(3500, () => opening.classList.add("hidden"));
+  at(4900, () => { $("controls").hidden = false; });
+});
+
+/* ---------- Sindhi / English toggle ---------- */
+const langBtn = $("langBtn");
+function setLang(lang) {
+  const sd = lang === "sd";
+  document.documentElement.classList.toggle("lang-sd", sd);
+  document.querySelectorAll("[data-sd]").forEach((el) => {
+    if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
+    el.innerHTML = sd ? el.dataset.sd : el.dataset.en;
+    el.classList.toggle("sd-on", sd);
+    if (sd) { el.setAttribute("lang", "sd"); el.setAttribute("dir", "rtl"); }
+    else { el.removeAttribute("lang"); el.removeAttribute("dir"); }
+  });
+  langBtn.innerHTML = sd ? '<span class="ctrl-en">EN</span>' : '<span class="ctrl-sd">سنڌي</span>';
+  langBtn.setAttribute("aria-label", sd ? "Read in English" : "Read in Sindhi");
+  store.set("valima-lang", lang);
+}
+langBtn.addEventListener("click", () =>
+  setLang(document.documentElement.classList.contains("lang-sd") ? "en" : "sd"));
+const startLang = params.get("lang") || store.get("valima-lang");
+if (startLang === "sd" || startLang === "ur") setLang("sd");
+
+/* ---------- Gentle parallax on lanterns, flower strings & watermark ---------- */
+const layers = [...document.querySelectorAll(".parallax")];
+if (layers.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    layers.forEach((el) => {
+      const box = el.parentElement.getBoundingClientRect();
+      if (box.bottom < -200 || box.top > innerHeight + 200) return;
+      const shift = -box.top * parseFloat(el.dataset.speed || 0);
+      el.style.translate = `0 ${shift.toFixed(1)}px`;
+    });
+  };
+  addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
+}
+
+/* ---------- Rose, marigold & gold-flake shower ---------- */
+function showerPetals() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const box = $("petals");
+  const colors = ["#d4af37", "#f1d98a", "#b8862b", "#c8233a", "#e3a21e", "#fbe7a1"];
+  for (let i = 0; i < 36; i++) {
+    const p = document.createElement("span");
+    p.className = "petal";
+    const dur = 5 + Math.random() * 5;
+    p.style.left = `${Math.random() * 100}%`;
+    p.style.background = colors[i % colors.length];
+    p.style.animationDuration = `${dur}s`;
+    p.style.animationDelay = `${Math.random() * 2.5}s`;
+    p.style.setProperty("--drift", `${(Math.random() - 0.5) * 160}px`);
+    p.style.setProperty("--spin", `${360 + Math.random() * 540}deg`);
+    p.style.transform = `scale(${0.6 + Math.random() * 0.7})`;
+    box.appendChild(p);
+  }
+  setTimeout(() => (box.innerHTML = ""), 13000);
+}
+
+/* ---------- Reveal on scroll ---------- */
+const reveals = document.querySelectorAll(".reveal");
+let observer = null;
+if ("IntersectionObserver" in window) {
+  observer = new IntersectionObserver(
+    (entries) => entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add("in"); observer.unobserve(e.target); }
+    }),
+    { threshold: 0.15 }
+  );
+}
+function revealVisible() {
+  reveals.forEach((el, i) => {
+    if (observer) { el.style.transitionDelay = `${Math.min(i, 8) * 0.08}s`; observer.observe(el); }
+    else el.classList.add("in");
+  });
+}
+
+/* ---------- Countdown ---------- */
+const pad = (n) => String(n).padStart(2, "0");
+const els = { d: $("cd-days"), h: $("cd-hours"), m: $("cd-mins"), s: $("cd-secs") };
+function tick() {
+  const diff = EVENT.start - Date.now();
+  if (diff <= 0) {
+    $("countdown").hidden = true;
+    $("countdownDone").hidden = false;
+    clearInterval(timer);
+    return;
+  }
+  const s = Math.floor(diff / 1000);
+  els.d.textContent = pad(Math.floor(s / 86400));
+  els.h.textContent = pad(Math.floor((s % 86400) / 3600));
+  els.m.textContent = pad(Math.floor((s % 3600) / 60));
+  els.s.textContent = pad(s % 60);
+}
+const timer = setInterval(tick, 1000);
+tick();
+
+/* ---------- Add to calendar (.ics) ---------- */
+const icsDate = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+const icsText = (t) => t.replace(/[\\;,]/g, (c) => `\\${c}`);
+$("calendarBtn").addEventListener("click", () => {
+  const ics = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Valima Invite//EN",
+    "BEGIN:VEVENT",
+    "UID:valima-20261229@invite",
+    `DTSTAMP:${icsDate(new Date())}`,
+    `DTSTART:${icsDate(EVENT.start)}`,
+    `DTEND:${icsDate(EVENT.end)}`,
+    `SUMMARY:${icsText(EVENT.title)}`,
+    `LOCATION:${icsText(EVENT.location)}`,
+    `DESCRIPTION:${icsText(EVENT.description)}`,
+    "BEGIN:VALARM",
+    "TRIGGER:-P1D",
+    "ACTION:DISPLAY",
+    "DESCRIPTION:Valima tomorrow at 8:00 PM",
+    "END:VALARM",
+    "END:VEVENT",
+    "END:VCALENDAR",
+  ].join("\r\n");
+  const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
+  const a = Object.assign(document.createElement("a"), { href: url, download: "valima.ics" });
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
