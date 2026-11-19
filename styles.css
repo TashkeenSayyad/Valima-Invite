@@ -445,7 +445,8 @@ body.locked main { transform: scale(1.05); }
 
 .couple { margin: 6px 0 6px; }
 .couple .name {
-  font-size: clamp(68px, 18vw, 120px);
+  font-size: clamp(40px, 12.8vw, 86px);
+  white-space: nowrap;
   line-height: 1.2;
   padding: 0 .12em;
   display: inline-block;
