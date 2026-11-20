@@ -1,3 +1,22 @@
+/* Lateef (SIL, OFL): a Sindhi typeface, with Sindhi letterforms for lang="sd".
+   Self-hosted (Arabic-script range only) and enlarged so it matches the old sizes. */
+@font-face {
+  font-family: "Lateef Sindhi";
+  src: url("assets/fonts/Lateef-Medium-arabic.woff2") format("woff2");
+  font-weight: 100 500;
+  font-display: swap;
+  size-adjust: 132%;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+200C-200E, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: "Lateef Sindhi";
+  src: url("assets/fonts/Lateef-SemiBold-arabic.woff2") format("woff2");
+  font-weight: 600 900;
+  font-display: swap;
+  size-adjust: 132%;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+200C-200E, U+FB50-FDFF, U+FE70-FEFF;
+}
+
 :root {
   --white: #ffffff;
   --ivory: #fdf9ef;
@@ -13,7 +32,7 @@
   --script: "Great Vibes", cursive;
   --caps: "Cormorant Garamond", Georgia, serif;
   --arabic: "Amiri", "Traditional Arabic", serif;
-  --sindhi: "Amiri", "MB Lateefi", "Lateef", serif;
+  --sindhi: "Lateef Sindhi", "MB Lateefi", "Lateef", serif;
   --maroon-band: #4f0c18;
 
   /* Fine metallic grain laid over the foil */
