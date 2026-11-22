@@ -133,7 +133,7 @@ def runs_width(runs):
     return sum(f.getlength(t) for t, f in runs)
 
 
-def diamond(draw, cx, cy, r, fill):
+def lozenge(draw, cx, cy, r, fill):
     draw.polygon([(cx, cy - r), (cx + r, cy), (cx, cy + r), (cx - r, cy)], fill=fill)
 
 
@@ -170,16 +170,16 @@ def build():
 
     d = ImageDraw.Draw(img)
 
-    # Double gold border, inset from the edge, with small corner diamonds
+    # Double gold border, inset from the edge, with small corner lozenges
     o, i = s(24), s(34)
     d.rectangle([o, o, w - o, h - o], outline=GOLD, width=s(2.2))
     d.rectangle([i, i, w - i, h - i], outline=GOLD_SOFT, width=s(1.2))
     for cx, cy in [(o, o), (w - o, o), (o, h - o), (w - o, h - o)]:
-        diamond(d, cx, cy, s(7), GOLD)
-        diamond(d, cx, cy, s(3), IVORY)
+        lozenge(d, cx, cy, s(7), GOLD)
+        lozenge(d, cx, cy, s(3), IVORY)
     for cx, cy in [(i + s(14), i + s(14)), (w - i - s(14), i + s(14)),
                    (i + s(14), h - i - s(14)), (w - i - s(14), h - i - s(14))]:
-        diamond(d, cx, cy, s(4), GOLD_SOFT)
+        lozenge(d, cx, cy, s(4), GOLD_SOFT)
 
     cx = w / 2
 
@@ -214,8 +214,8 @@ def build():
     d.line([(cx - rw, ry), (cx + rw, ry)], fill=GOLD, width=s(1.5))
     for ex in (cx - rw, cx + rw):
         d.ellipse([ex - s(4.5), ry - s(4.5), ex + s(4.5), ry + s(4.5)], fill=GOLD)
-    diamond(d, cx, ry, s(6), GOLD)
-    diamond(d, cx, ry, s(2.5), IVORY)
+    lozenge(d, cx, ry, s(6), GOLD)
+    lozenge(d, cx, ry, s(2.5), IVORY)
 
     # Date, then venue
     date_f = font("CormorantGaramond-Variable.woff2", 31, wght=600)
