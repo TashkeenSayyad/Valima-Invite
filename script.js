@@ -21,7 +21,7 @@ const EVENT = {
   title: "Valima Reception · Tashkeen & Anusha",
   start: new Date("2026-12-29T19:00:00+05:00"),
   end: new Date("2026-12-29T22:30:00+05:00"),
-  location: "Zam Zam Lawn, Thatta, Sindh, Pakistan",
+  location: "Zam Zam Lawn, Shah Murad Road, Thatta, Sindh, Pakistan",
   description: "You are cordially invited to the Valima reception of Tashkeen & Anusha. Guests from 7:00 PM, dinner at 9:00 PM.",
 };
 
@@ -54,7 +54,7 @@ if (CONFIG.hosts) {
 const rsvp = $("rsvpBtn");
 if (CONFIG.rsvpWhatsApp) {
   const msg = [
-    "Assalam-o-Alaikum! InshaAllah we will attend the Valima of Tashkeen & Anusha on 29 December 2026 at Zam Zam Lawn, Thatta.",
+    "Assalam-o-Alaikum! InshaAllah we will attend the Valima of Tashkeen & Anusha on 29 December 2026 at Zam Zam Lawn, Shah Murad Road, Thatta.",
     `Name: ${guest}`,
     "Number of guests: ",
   ].join("\n");
