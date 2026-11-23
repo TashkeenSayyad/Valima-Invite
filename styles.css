@@ -548,6 +548,7 @@ body.locked main { transform: scale(1.05); }
   font-weight: 500;
   letter-spacing: .08em;
 }
+.venue-sub { display: inline-block; font-size: .72em; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
 .inshallah { margin-top: 8px; font-style: italic; color: var(--gold-deep); }
 
 /* ---------- Sections ---------- */

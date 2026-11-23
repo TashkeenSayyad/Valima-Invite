@@ -43,7 +43,7 @@ KICKER = "VALIMA"
 NAME_1, SURNAME_1 = "Tashkeen", "Syed"
 NAME_2, SURNAME_2 = "Anusha", "Nizamani"
 DATE = "TUESDAY · 29 DECEMBER 2026 · 7:00 PM"
-VENUE = "ZAM ZAM DIAMOND · SHAH MURAD ROAD · THATTA"
+VENUE = "ZAM ZAM DIAMOND BANQUET · SHAH MURAD ROAD · THATTA"
 HINT = "YOU ARE WARMLY INVITED"
 
 
@@ -220,8 +220,8 @@ def build():
     # Date, then venue
     date_f = font("CormorantGaramond-Variable.woff2", 31, wght=600)
     draw_tracked(d, cx, s(408), DATE, date_f, INK, tracking=s(31 * 0.14))
-    venue_f = font("CormorantGaramond-Variable.woff2", 25, wght=600)
-    draw_tracked(d, cx, s(458), VENUE, venue_f, GOLD_DEEP, tracking=s(25 * 0.3))
+    venue_f = font("CormorantGaramond-Variable.woff2", 23, wght=600)
+    draw_tracked(d, cx, s(458), VENUE, venue_f, GOLD_DEEP, tracking=s(23 * 0.18))
 
     # Quiet hint line
     hint_f = font("CormorantGaramond-Variable.woff2", 18, wght=500)
