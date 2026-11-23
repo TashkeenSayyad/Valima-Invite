@@ -68,6 +68,16 @@ ffmpeg -framerate 30 -i frames/f%04d.jpg -i music-video.wav -vf format=yuv420p -
 
 Add a guest's name as a second argument (e.g. `"?to=Ahmed+Family"`) to record a personalised version.
 
+## Printed card
+
+`print/valima-card-A5-print.pdf` is a print-ready, two-sided A5 card (148 × 210 mm) with 3 mm bleed on every side (page size 154 × 216 mm) and all fonts embedded: English on the front, Sindhi on the back with a QR code to the website. Previews: `print/valima-card-front.png`, `print/valima-card-back.png` (300 dpi).
+
+To rebuild after changes to `print/card.html`:
+
+```bash
+node tools/build-print.js
+```
+
 ## Settings
 
 Open `script.js`; the `CONFIG` block at the top controls:
