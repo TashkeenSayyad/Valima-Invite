@@ -4,7 +4,7 @@ A white-themed, single-page invitation website for the Valima reception.
 
 - **Date:** Tuesday, 29 December 2026
 - **Time:** 7:00 PM (PKT)
-- **Venue:** Zam Zam Lawn, Shah Murad Road, Thatta
+- **Venue:** Zam Zam Diamond, Shah Murad Road, Thatta
 - **Couple:** Tashkeen & Anusha
 
 ## Features
