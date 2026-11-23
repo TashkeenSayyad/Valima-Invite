@@ -28,29 +28,41 @@ print(f'<svg viewBox="0 0 {n} {n}" shape-rendering="crispEdges"><rect width="{n}
 `, SITE_URL]).toString().trim();
 
 const html = fs.readFileSync(path.join(ROOT, 'print', 'card.html'), 'utf8')
-  .replace('{{GOLD_DEFS}}', goldDefs).replace('{{MONOGRAM}}', monogram).replace('{{QR}}', qr);
+  .replace('{{GOLD_DEFS}}', goldDefs).replace('{{MONOGRAM}}', monogram).replaceAll('{{QR}}', qr);
 const built = path.join(ROOT, 'print', '.card.built.html');
 fs.writeFileSync(built, html);
 
+// Two versions: Sindhi back (default) and English back
+const VARIANTS = [
+  { cls: '', pdf: 'valima-card-A5-print.pdf', back: 'back' },
+  { cls: 'en', pdf: 'valima-card-A5-print-english.pdf', back: 'back-english' },
+];
+
 (async () => {
   const browser = await chromium.launch();
-  const page = await browser.newPage();
-  await page.goto('file://' + built);
-  await page.evaluate(() => document.fonts.ready);
-  await page.waitForTimeout(600);
-  const pdf = path.join(ROOT, 'print', 'valima-card-A5-print.pdf');
-  await page.pdf({ path: pdf, width: '154mm', height: '216mm', printBackground: true, preferCSSPageSize: true });
-  console.log('wrote', path.relative(ROOT, pdf));
+  for (const v of VARIANTS) {
+    const page = await browser.newPage();
+    await page.goto('file://' + built);
+    await page.evaluate((c) => { if (c) document.body.classList.add(c); }, v.cls);
+    await page.evaluate(() => document.fonts.ready);
+    await page.waitForTimeout(600);
+    const pdf = path.join(ROOT, 'print', v.pdf);
+    await page.pdf({ path: pdf, width: '154mm', height: '216mm', printBackground: true, preferCSSPageSize: true });
+    console.log('wrote', path.relative(ROOT, pdf));
 
-  // 300 dpi previews: 154 mm = 582 CSS px; 1819 px / 582 px ≈ 3.125
-  const shot = await browser.newPage({ viewport: { width: 582, height: 816 }, deviceScaleFactor: 3.125 });
-  await shot.goto('file://' + built);
-  await shot.evaluate(() => document.fonts.ready);
-  await shot.waitForTimeout(600);
-  for (const [i, side] of [[0, 'front'], [1, 'back']]) {
-    const out = path.join(ROOT, 'print', `valima-card-${side}.png`);
-    await shot.locator('.page').nth(i).screenshot({ path: out });
-    console.log('wrote', path.relative(ROOT, out));
+    // 300 dpi previews: 154 mm = 582 CSS px; 1819 px / 582 px ≈ 3.125
+    const shot = await browser.newPage({ viewport: { width: 582, height: 816 }, deviceScaleFactor: 3.125 });
+    await shot.goto('file://' + built);
+    await shot.evaluate((c) => { if (c) document.body.classList.add(c); }, v.cls);
+    await shot.evaluate(() => document.fonts.ready);
+    await shot.waitForTimeout(600);
+    const pages = shot.locator('.page:visible');
+    const sides = v.cls ? [[1, v.back]] : [[0, 'front'], [1, v.back]];
+    for (const [i, side] of sides) {
+      const out = path.join(ROOT, 'print', `valima-card-${side}.png`);
+      await pages.nth(i).screenshot({ path: out });
+      console.log('wrote', path.relative(ROOT, out));
+    }
   }
   await browser.close();
   fs.unlinkSync(built);

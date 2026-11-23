@@ -70,7 +70,7 @@ Add a guest's name as a second argument (e.g. `"?to=Ahmed+Family"`) to record a 
 
 ## Printed card
 
-`print/valima-card-A5-print.pdf` is a print-ready, two-sided A5 card (148 × 210 mm) with 3 mm bleed on every side (page size 154 × 216 mm) and all fonts embedded: English on the front, Sindhi on the back with a QR code to the website. Previews: `print/valima-card-front.png`, `print/valima-card-back.png` (300 dpi).
+`print/valima-card-A5-print.pdf` (Sindhi back) and `print/valima-card-A5-print-english.pdf` (English back) are print-ready, two-sided A5 card (148 × 210 mm) with 3 mm bleed on every side (page size 154 × 216 mm) and all fonts embedded: English on the front, Sindhi or English on the back with a QR code to the website. Previews: `print/valima-card-front.png`, `print/valima-card-back.png`, `print/valima-card-back-english.png` (300 dpi).
 
 To rebuild after changes to `print/card.html`:
 

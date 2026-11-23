@@ -119,6 +119,18 @@ html, body { width: 154mm; }
 .qr svg { width: 13mm; height: 13mm; display: block; }
 .qr p { font-size: 6.4pt; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); text-align: left; line-height: 1.5; }
 .back .content { padding-bottom: 20mm; }
+/* Variant switch: body.en shows the English back, otherwise the Sindhi back */
+body.en .back-sd, body:not(.en) .back-en { display: none; }
+.en-head { font-style: italic; font-size: 10pt; color: var(--muted); }
+.en-title { font-family: "Great Vibes"; font-size: 34pt; color: var(--gold-deep); line-height: 1.15; }
+.en-lead { font-style: italic; font-size: 10.4pt; color: var(--muted); line-height: 1.5; }
+.en-names { font-family: "Great Vibes"; font-size: 30pt; color: var(--gold-deep); line-height: 1.2; margin: 1mm 0; }
+.en-body { font-size: 11pt; line-height: 1.5; }
+.details.en-box h3 { font-family: "Cormorant"; font-size: 9pt; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: var(--maroon); margin-bottom: 1mm; }
+.en-box .row { font-size: 10.6pt; line-height: 1.9; }
+.en-box .row b { font-size: 8pt; letter-spacing: .2em; text-transform: uppercase; }
+.dua-en { font-style: italic; font-size: 9.6pt; color: var(--muted); line-height: 1.45; }
+.await-en { font-family: "Great Vibes"; font-size: 20pt; color: var(--gold-deep); margin-top: 1.4mm; }
 </style>
 </head>
 <body>
@@ -155,7 +167,7 @@ html, body { width: 154mm; }
 </section>
 
 <!-- ===================== BACK (Sindhi) ===================== -->
-<section class="page back">
+<section class="page back back-sd">
   <div class="ajrak top"></div><div class="ajrak bottom"></div>
   <div class="border"></div>
   <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
@@ -180,6 +192,36 @@ html, body { width: 154mm; }
     <p class="dua" lang="ar">بَارَكَ ٱللَّٰهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
     <p class="sd dua-tr" lang="sd">الله اوهان ٻنهي کي برڪت ڏئي، اوهان تي برڪتون نازل ڪري ۽ اوهان ٻنهي کي ڀلائيءَ تي گڏ رکي.</p>
     <p class="sd await" lang="sd">اوهان جي آمد جا منتظر</p>
+  </div>
+  <div class="qr">{{QR}}<p>Scan for the<br>invitation &amp; map</p></div>
+</section>
+
+<!-- ===================== BACK (English) ===================== -->
+<section class="page back back-en">
+  <div class="ajrak top"></div><div class="ajrak bottom"></div>
+  <div class="border"></div>
+  <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
+  <div class="arch" style="top:16mm;bottom:16mm"></div>
+  <div class="content">
+    <p class="en-head">An Invitation</p>
+    <p class="en-title">The Valima Invitation</p>
+    <div class="rule"></div>
+    <p class="en-lead">With the blessings of Allah and the duas of our elders,<br>you are warmly invited to the Valima of</p>
+    <p class="en-names">Tashkeen <span style="font-size:.6em">&amp;</span> <span class="cap-a">A</span>nusha</p>
+    <p class="en-body">On the joyous occasion of the wedding celebrations,<br>your presence at the Valima would be a matter<br>of great joy and honour for us.</p>
+
+    <div class="details en-box">
+      <h3>Event Details</h3>
+      <div class="row"><b>Day</b><span>Tuesday</span></div>
+      <div class="row"><b>Date</b><span>29 December 2026</span></div>
+      <div class="row"><b>Guests</b><span>7:00 PM</span></div>
+      <div class="row"><b>Dinner</b><span>9:00 PM</span></div>
+      <div class="row"><b>Venue</b><span>Zam Zam Lawn, Thatta (Sindh)</span></div>
+    </div>
+
+    <p class="dua" lang="ar">بَارَكَ ٱللَّٰهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
+    <p class="dua-en">“May Allah bless you both, shower His blessings upon you,<br>and unite you both in goodness.”</p>
+    <p class="await-en">Eagerly awaiting your arrival</p>
   </div>
   <div class="qr">{{QR}}<p>Scan for the<br>invitation &amp; map</p></div>
 </section>
