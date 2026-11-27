@@ -21,7 +21,9 @@ const TAP_AT = 2.6, CLICK_AT = 2.95, SCROLL_AT = 9.2, SCROLL_FOR = 5.4, END_AT =
   await page.clock.install({ time: startTime });
   await page.goto(page_url);
   await page.evaluate(() => document.fonts.ready);
-  await page.waitForTimeout(500);
+  // load the couple photo up front so it is ready when the camera reaches it
+  await page.evaluate(() => document.querySelectorAll('img[loading="lazy"]').forEach((i) => { i.loading = 'eager'; }));
+  await page.waitForTimeout(1500);
   // Stop real time from flowing: from here on time only moves one frame at a time.
   await page.clock.pauseAt(startTime + 60_000);
   await page.addStyleTag({ content: `
@@ -62,7 +64,7 @@ const TAP_AT = 2.6, CLICK_AT = 2.95, SCROLL_AT = 9.2, SCROLL_FOR = 5.4, END_AT =
     if (!scrolled && t >= SCROLL_AT) {
       scrolled = true;
       await page.evaluate((dur) => {
-        const target = document.querySelector('.venue-line').getBoundingClientRect().top + scrollY - innerHeight * 0.62;
+        const target = document.querySelector('.venue-line').getBoundingClientRect().bottom + scrollY - innerHeight * 0.9;
         const start = scrollY, t1 = performance.now();
         const ease = k => k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
         (function step(now) {
