@@ -1090,3 +1090,7 @@ body.locked main { transform: scale(1.05); }
   .kairi-corner.bl { left: 20px; }
   .kairi-corner.br { right: 20px; }
 }
+
+/* /bridal/: "…of their daughter" is longer, so tighten the small caps to keep one line */
+html[data-variant="bridal"] .title { letter-spacing: .12em; }
+@media (max-width: 720px) { html[data-variant="bridal"] .title { letter-spacing: .08em; font-size: 12px; } }

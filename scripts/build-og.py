@@ -8,8 +8,10 @@ assets/fonts, converted to TTF in memory with fontTools).
 
 Needs: pip install pillow fonttools brotli
 After redrawing, bump ?v= on og:image and twitter:image in index.html.
+`--bridal` draws assets/og-card-bridal.jpg (Anusha & Tashkeen) for the /bridal/ page.
 """
 import io
+import sys
 import math
 from pathlib import Path
 
@@ -20,6 +22,9 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 FONTS = ROOT / "assets" / "fonts"
 OUT = ROOT / "assets" / "og-card.jpg"
+BRIDAL = "--bridal" in sys.argv
+if BRIDAL:
+    OUT = ROOT / "assets" / "og-card-bridal.jpg"
 
 W, H = 1200, 630
 SCALE = 2  # draw at 2x, then downsample for smooth edges
@@ -42,6 +47,8 @@ FOIL = [(0.00, (125, 90, 23)), (0.20, (168, 125, 40)), (0.34, (201, 155, 62)),
 KICKER = "VALIMA"
 NAME_1, SURNAME_1 = "Tashkeen", "Syed"
 NAME_2, SURNAME_2 = "Anusha", "Nizamani"
+if BRIDAL:  # the /bridal/ page lists the bride first
+    (NAME_1, SURNAME_1), (NAME_2, SURNAME_2) = (NAME_2, SURNAME_2), (NAME_1, SURNAME_1)
 DATE = "TUESDAY · 29 DECEMBER 2026 · 7:00 PM"
 VENUE = "ZAM ZAM DIAMOND BANQUET · SHAH MURAD ROAD · THATTA"
 HINT = "YOU ARE WARMLY INVITED"
@@ -191,8 +198,9 @@ def build():
     script = font("GreatVibes-Regular.woff2", 112)
     script_a = font("AlexBrush-Regular.woff2", 104)
     amp_f = font("GreatVibes-Regular.woff2", 70)
-    left = [(NAME_1, script)]
-    right = [(NAME_2[0], script_a), (NAME_2[1:], script)]
+    def runs(name):  # a leading capital A comes from Alex Brush, as on the site
+        return [(name[0], script_a), (name[1:], script)] if name[0] == "A" else [(name, script)]
+    left, right = runs(NAME_1), runs(NAME_2)
     gap = s(30)
     wl, wr, wa = runs_width(left), runs_width(right), amp_f.getlength("&")
     total = wl + gap + wa + gap + wr

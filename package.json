@@ -3,7 +3,8 @@
   "private": true,
   "description": "Valima invitation website for Tashkeen & Anusha",
   "scripts": {
-    "og": "python3 scripts/build-og.py",
+    "og": "python3 scripts/build-og.py && python3 scripts/build-og.py --bridal",
+    "bridal": "python3 scripts/build-bridal.py",
     "video": "node tools/record-video.js frames"
   }
 }

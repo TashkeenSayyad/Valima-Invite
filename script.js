@@ -16,13 +16,19 @@ const CONFIG = {
   music: "music.mp3",
 };
 
+// The /bridal/ page (<html data-variant="bridal">) is the same invitation from the bride's parents
+const BRIDAL = document.documentElement.dataset.variant === "bridal";
+const COUPLE = BRIDAL ? "Anusha & Tashkeen" : "Tashkeen & Anusha";
+
 // Valima: Tuesday 29 December 2026, 7:00 PM Pakistan Standard Time (UTC+5)
 const EVENT = {
-  title: "Valima Reception · Tashkeen & Anusha",
+  title: `Valima Reception · ${COUPLE}`,
   start: new Date("2026-12-29T19:00:00+05:00"),
   end: new Date("2026-12-29T22:30:00+05:00"),
   location: "Zam Zam Diamond Banquet, Shah Murad Road, Thatta, Sindh, Pakistan",
-  description: "Mr & Mrs Jallal Hyder Shah Bukhari Syed request the pleasure of your company at the Valima of their son Tashkeen with Anusha. Guests from 7:00 PM, dinner at 9:00 PM.",
+  description: BRIDAL
+    ? "Mr & Mrs Barkat Ali Nizamani request the pleasure of your company at the Valima of their daughter Anusha with Tashkeen. Guests from 7:00 PM, dinner at 9:00 PM."
+    : "Mr & Mrs Jallal Hyder Shah Bukhari Syed request the pleasure of your company at the Valima of their son Tashkeen with Anusha. Guests from 7:00 PM, dinner at 9:00 PM.",
 };
 
 const $ = (id) => document.getElementById(id);
@@ -38,7 +44,7 @@ if (guest) {
   const g = $("greeting");
   g.textContent = `Dear ${guest}`;
   g.hidden = false;
-  document.title = `${guest} · Valima · Tashkeen & Anusha`;
+  document.title = `${guest} · Valima · ${COUPLE}`;
 }
 
 /* ---------- Hosts line ---------- */
@@ -54,7 +60,7 @@ if (CONFIG.hosts) {
 const rsvp = $("rsvpBtn");
 if (CONFIG.rsvpWhatsApp) {
   const msg = [
-    "Assalam-o-Alaikum! InshaAllah we will attend the Valima of Tashkeen & Anusha on 29 December 2026 at Zam Zam Diamond Banquet, Shah Murad Road, Thatta.",
+    `Assalam-o-Alaikum! InshaAllah we will attend the Valima of ${COUPLE} on 29 December 2026 at Zam Zam Diamond Banquet, Shah Murad Road, Thatta.`,
     `Name: ${guest}`,
     "Number of guests: ",
   ].join("\n");

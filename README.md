@@ -42,6 +42,16 @@ python3 -m http.server 8000
 
 In the repository settings, go to **Pages**, choose **Deploy from a branch**, select the branch and `/ (root)`, and save. The site will be live at `https://<username>.github.io/Valima-Invite/`.
 
+## Bride's family version (/bridal/)
+
+`https://tashkeensayyad.github.io/Valima-Invite/bridal/` is the same invitation sent by the bride's parents: Mr & Mrs Barkat Ali Nizamani invite you to the Valima of their daughter Anusha with Tashkeen (son of Jallal Hyder Shah Bukhari Syed). It has its own preview card (`assets/og-card-bridal.jpg`). Personal links work the same way (`…/bridal/?to=Ahmed+Family`).
+
+`bridal/index.html` is generated from `index.html`; after changing the main page, regenerate it:
+
+```bash
+npm run bridal
+```
+
 ## Video invitation
 
 `valima-invite.mp4` is a 17-second, 1080×1920 video of the palace doors opening and the invitation, ready for WhatsApp status or an Instagram reel, with the Sufi kalam *Lam Yati Nazeero Kafi Nazarin* as its soundtrack (timed so the rhythm comes in as the doors open).
