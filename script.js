@@ -22,7 +22,7 @@ const EVENT = {
   start: new Date("2026-12-29T19:00:00+05:00"),
   end: new Date("2026-12-29T22:30:00+05:00"),
   location: "Zam Zam Diamond Banquet, Shah Murad Road, Thatta, Sindh, Pakistan",
-  description: "You are cordially invited to the Valima reception of Tashkeen & Anusha. Guests from 7:00 PM, dinner at 9:00 PM.",
+  description: "Mr & Mrs Jallal Hyder Shah Bukhari Syed request the pleasure of your company at the Valima of their son Tashkeen with Anusha. Guests from 7:00 PM, dinner at 9:00 PM.",
 };
 
 const $ = (id) => document.getElementById(id);

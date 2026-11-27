@@ -489,6 +489,17 @@ body.locked main { transform: scale(1.05); }
   display: block;
   margin-bottom: -2px;
 }
+.inviters { margin: 14px 0 6px; }
+.inviters-pre {
+  font-family: var(--caps); font-weight: 600; font-size: clamp(11px, 3vw, 13px);
+  letter-spacing: .3em; text-transform: uppercase; color: var(--muted);
+}
+.inviters-name {
+  font-family: var(--caps); font-weight: 600; font-size: clamp(17px, 4.6vw, 24px);
+  letter-spacing: .12em; text-transform: uppercase; color: var(--gold-deep); line-height: 1.35; margin-top: 2px;
+}
+.inviters-pre.sd-on { font-size: 17px; }
+.inviter-small { color: var(--gold-deep); margin-bottom: 4px; letter-spacing: .12em; line-height: 1.7; }
 .amp-line {
   display: flex;
   align-items: center;
