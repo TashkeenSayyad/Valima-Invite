@@ -88,6 +88,10 @@ To rebuild after changes to `print/card.html`:
 node tools/build-print.js
 ```
 
+## Text size
+
+Body text is a little larger by default. The round **Aa** button (bottom left) switches between Normal, Large and Extra large text for older guests; the choice is remembered. To send someone the invitation already in large text, add `?size=large` or `?size=xl` to the link (e.g. `…/Valima-Invite/?size=xl&to=Nani+Ammi`).
+
 ## Settings
 
 Open `script.js`; the `CONFIG` block at the top controls:

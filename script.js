@@ -104,6 +104,33 @@ $("openBtn").addEventListener("click", () => {
   at(4900, () => { $("controls").hidden = false; });
 });
 
+/* ---------- Text size: Normal / Large / Extra large (for elders) ---------- */
+const SIZES = [["", "Normal text"], ["large", "Large text"], ["xl", "Extra large text"]];
+const textBtn = $("textBtn");
+let toastTimer;
+function setTextSize(i, announce) {
+  const [key, label] = SIZES[i];
+  if (key) document.documentElement.dataset.text = key; else delete document.documentElement.dataset.text;
+  textBtn.setAttribute("aria-label", `Text size: ${label.toLowerCase()}. Tap to change`);
+  store.set("valima-text", key);
+  if (!announce) return;
+  let t = document.querySelector(".size-toast");
+  if (!t) { t = Object.assign(document.createElement("div"), { className: "size-toast" }); t.setAttribute("aria-live", "polite"); document.body.appendChild(t); }
+  t.textContent = label;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 1600);
+}
+textBtn.addEventListener("click", () => {
+  const cur = SIZES.findIndex(([k]) => k === (document.documentElement.dataset.text || ""));
+  setTextSize((cur + 1) % SIZES.length, true);
+});
+{
+  const want = params.get("size") || store.get("valima-text") || "";
+  const i = SIZES.findIndex(([k]) => k === want);
+  if (i > 0) setTextSize(i, false);
+}
+
 /* ---------- Sindhi / English toggle ---------- */
 const langBtn = $("langBtn");
 function setLang(lang) {
