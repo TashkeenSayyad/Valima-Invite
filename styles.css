@@ -50,6 +50,10 @@
   --foil: linear-gradient(105deg,
     #7d5a17 0%, #a87d28 20%, #c99b3e 34%, #e0bf6c 44%,
     #c49a3c 54%, #94691f 70%, #b88a33 86%, #7d5a17 100%);
+  /* Deeper foil for the couple's names: same metallic look, far stronger contrast on ivory */
+  --foil-names: linear-gradient(105deg,
+    #5a3f0e 0%, #7d5a17 22%, #9a7228 38%, #b8892e 47%,
+    #94691f 58%, #6e4d14 74%, #8a6420 88%, #5a3f0e 100%);
   --foil-button: linear-gradient(135deg, #cfa94f 0%, #ecd590 40%, #f6e6b0 55%, #d6b25c 75%, #c49a3c 100%);
   --foil-flat: linear-gradient(135deg, #a57a28 0%, #d9b866 30%, #f4e2a2 48%, #c99b3e 66%, #93701f 100%);
 
@@ -88,6 +92,12 @@ body.locked { overflow: hidden; }
 @keyframes shimmer {
   0%, 100% { background-position: 0 0, 0% 50%; }
   50% { background-position: 0 0, 100% 50%; }
+}
+
+/* Couple's names: deeper gold and a crisp edge so they read clearly */
+.couple .name.foil, .opening-card .script.foil, .sindhi-names.foil, .sindhi-small.foil {
+  background-image: var(--grain), var(--foil-names);
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, .9)) drop-shadow(0 1px 1.5px rgba(70, 48, 10, .28));
 }
 
 /* Gold gradient border on a rounded box: white fill, foil edge */
