@@ -11,7 +11,7 @@ A white-themed, single-page invitation website for the Valima reception.
 
 - Premium gold-foil styling with English translations under all Arabic & Sindhi text
 - Desi shaadi-card styling: marigold garlands, Mughal arch, paisley (kairi) motifs, jaali pattern, Ajrak borders, Sindhi text
-- "Open Invitation" card with a gold T ✦ A laurel-wreath monogram, resting on carved ivory palace doors (raised panels, jaali windows, gold studs and knocker rings, a small marigold garland). The card fades, a gold T ✦ A medallion across the seam splits in two, and the doors swing open slowly as warm light spills through and the invitation settles into view, followed by a rose, marigold & gold-flake shower
+- Welcome card ("View Invitation" button) with a gold T ✦ A laurel-wreath monogram, resting on carved ivory palace doors (raised panels, jaali windows, gold studs and knocker rings, a small marigold garland). The card fades, a gold T ✦ A medallion across the seam splits in two, and the doors swing open slowly as warm light spills through and the invitation settles into view, followed by a rose, marigold & gold-flake shower
 - Couple's names in Sindhi calligraphy (تاشقين ۽ انوشا)
 - Textured gold-foil lettering with twinkling sparkles around the names
 - Swaying golden Mughal lanterns with a warm glow
